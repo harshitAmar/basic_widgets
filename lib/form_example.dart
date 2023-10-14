@@ -1,26 +1,27 @@
+import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
+
 class MyForm extends StatefulWidget {
   const MyForm({super.key});
 
   @override
-  _MyFormState createState() => _MyFormState();
+  MyFormState createState() => MyFormState();
 }
 
-class _MyFormState extends State<MyForm> {
+class MyFormState extends State<MyForm> {
   final GlobalKey<FormState> _formKey = GlobalKey<FormState>();
   String _name = '';
   String _email = '';
   String _password = '';
-  String ?_selectedGender ;
+  String? _selectedGender;
   bool _subscribeToNewsletter = false;
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-     appBar: AppBar(
-       title: const Text("Form Example"),
-     ),
-
+      appBar: AppBar(
+        title: const Text("Form Example"),
+      ),
       body: Form(
         key: _formKey,
         child: Padding(
@@ -37,7 +38,7 @@ class _MyFormState extends State<MyForm> {
                   return null;
                 },
                 onSaved: (value) {
-                  if(value!=null) {
+                  if (value != null) {
                     _name = value;
                   }
                 },
@@ -46,14 +47,15 @@ class _MyFormState extends State<MyForm> {
                 decoration: const InputDecoration(labelText: 'Email'),
                 keyboardType: TextInputType.emailAddress,
                 validator: (value) {
-                  if(value!=null)
-                  if (value.isEmpty) {
-                    return 'Please enter your email address';
+                  if (value != null) {
+                    if (value.isEmpty) {
+                      return 'Please enter your email address';
+                    }
                   }
                   return null;
                 },
                 onSaved: (value) {
-                  if(value!=null) {
+                  if (value != null) {
                     _email = value;
                   }
                 },
@@ -62,14 +64,15 @@ class _MyFormState extends State<MyForm> {
                 decoration: const InputDecoration(labelText: 'Password'),
                 obscureText: true,
                 validator: (value) {
-                  if(value!=null)
-                  if (value.isEmpty) {
-                    return 'Please enter a password';
+                  if (value != null) {
+                    if (value.isEmpty) {
+                      return 'Please enter a password';
+                    }
                   }
                   return null;
                 },
                 onSaved: (value) {
-                  if(value!=null) {
+                  if (value != null) {
                     _password = value;
                   }
                 },
@@ -78,10 +81,10 @@ class _MyFormState extends State<MyForm> {
                 decoration: const InputDecoration(labelText: 'Gender'),
                 value: _selectedGender,
                 onChanged: (newValue) {
-                  if(newValue!=null) {
+                  if (newValue != null) {
                     setState(() {
-                    _selectedGender = newValue;
-                  });
+                      _selectedGender = newValue;
+                    });
                   }
                 },
                 items: ['Male', 'Female', 'Other']
@@ -97,10 +100,10 @@ class _MyFormState extends State<MyForm> {
                   Checkbox(
                     value: _subscribeToNewsletter,
                     onChanged: (value) {
-                      if(value!=null) {
+                      if (value != null) {
                         setState(() {
-                        _subscribeToNewsletter = value;
-                      });
+                          _subscribeToNewsletter = value;
+                        });
                       }
                     },
                   ),
@@ -112,11 +115,10 @@ class _MyFormState extends State<MyForm> {
                   if (_formKey.currentState!.validate()) {
                     _formKey.currentState!.save();
                     // Perform form submission here
-                    print('Name: $_name');
-                    print('Email: $_email');
-                    print('Password: $_password');
-                    print('Gender: $_selectedGender');
-                    print('Subscribe to Newsletter: $_subscribeToNewsletter');
+                    if (kDebugMode) {
+                      print(
+                          'Name: $_name\nEmail: $_email\nPassword: $_password\nGender: $_selectedGender\nSubscribe to Newsletter: $_subscribeToNewsletter');
+                    }
                   }
                 },
                 child: const Text('Submit'),
