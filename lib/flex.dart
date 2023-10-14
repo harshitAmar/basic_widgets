@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 
- 
 class MyLayoutExample extends StatelessWidget {
   const MyLayoutExample({super.key});
 
@@ -12,7 +11,7 @@ class MyLayoutExample extends StatelessWidget {
       ),
       body: Column(
         mainAxisAlignment: MainAxisAlignment.center,
-        crossAxisAlignment: CrossAxisAlignment.stretch,
+        crossAxisAlignment: CrossAxisAlignment.center,
         children: [
           Container(
             height: 100.0,
@@ -43,21 +42,38 @@ class MyLayoutExample extends StatelessWidget {
             ],
           ),
           const Divider(),
-          Stack(
-            alignment: Alignment.center,
-            children: [
-              Container(
-                width: 200.0,
-                height: 200.0,
-                color: Colors.yellow,
-              ),
-              Container(
-                width: 100.0,
-                height: 100.0,
-                color: Colors.orange,
-                child: const Center(child: Text('Stack')),
-              ),
-            ],
+          SizedBox(
+            width: 200,
+            height: 200,
+            child: Stack(
+              clipBehavior: Clip.none,
+              alignment: Alignment.center,
+              children: [
+                Container(
+                  width: 200.0,
+                  height: 200.0,
+                  color: Colors.yellow,
+                ),
+                Positioned(
+                  top: 20,
+                  bottom: 0,
+                  right: -10,
+                  width: 100,
+                  child: Container(
+                    width: 120.0,
+                    height: 50.0,
+                    color: Colors.deepOrange,
+                    child: const Center(child: Text('Stack')),
+                  ),
+                ),
+                Container(
+                  width: 100.0,
+                  height: 100.0,
+                  color: Colors.orange,
+                  child: const Center(child: Text('Stack')),
+                ),
+              ],
+            ),
           ),
         ],
       ),

@@ -13,10 +13,12 @@ class CardExample extends StatelessWidget {
       body: SizedBox(
         height: 200,
         child: Card(
+          borderOnForeground: false,
+          shadowColor: Colors.blue,
           shape:
               RoundedRectangleBorder(borderRadius: BorderRadius.circular(20)),
-          color: Colors.deepPurple,
-          elevation: 4.0,
+          color: Colors.red,
+          elevation: 8,
           margin: const EdgeInsets.all(16.0),
           child: Padding(
             padding: const EdgeInsets.all(8.0),

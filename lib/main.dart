@@ -21,6 +21,7 @@ class MyApp extends StatelessWidget {
     return MaterialApp(
       title: 'Flutter Demo',
       theme: ThemeData(
+        fontFamily: "Inconsolata",
         colorScheme: ColorScheme.fromSeed(seedColor: Colors.deepPurple),
         useMaterial3: true,
       ),
@@ -74,10 +75,8 @@ class _MyHomePageState extends State<MyHomePage> {
                 title: const Text("Row and Columns")),
             ListTile(
                 onTap: () {
-                  Navigator.push(
-                      context,
-                      MaterialPageRoute(
-                          builder: (context) => const MyForm()));
+                  Navigator.push(context,
+                      MaterialPageRoute(builder: (context) => const MyForm()));
                 },
                 title: const Text("Form")),
             ListTile(

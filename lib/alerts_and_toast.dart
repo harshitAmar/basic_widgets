@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:fluttertoast/fluttertoast.dart';
 
-
 class AlertsAndToastExample extends StatelessWidget {
   const AlertsAndToastExample({super.key});
 
@@ -35,7 +34,6 @@ class AlertsAndToastExample extends StatelessWidget {
               },
               child: const Text('Show Toast'),
             ),
-
           ],
         ),
       ),
@@ -56,6 +54,12 @@ class AlertsAndToastExample extends StatelessWidget {
               },
               child: const Text('OK'),
             ),
+            TextButton(
+              onPressed: () {
+                Navigator.of(context).pop();
+              },
+              child: const Text('Cancel'),
+            ),
           ],
         );
       },
@@ -64,8 +68,10 @@ class AlertsAndToastExample extends StatelessWidget {
 
   void _showSnackbar(BuildContext context) {
     ScaffoldMessenger.of(context).showSnackBar(
-      const SnackBar(
-        content: Text('This is a snackbar message.'),
+      SnackBar(
+        action: SnackBarAction(label: "Close", onPressed: () {}),
+        content: const Text('This is a snackbar message.'),
+        dismissDirection: DismissDirection.endToStart,
       ),
     );
   }
@@ -73,10 +79,8 @@ class AlertsAndToastExample extends StatelessWidget {
   void _showToast() {
     Fluttertoast.showToast(
       msg: 'This is a toast message.',
-      toastLength: Toast.LENGTH_SHORT,
-      gravity: ToastGravity.BOTTOM,
+      toastLength: Toast.LENGTH_LONG,
+      gravity: ToastGravity.CENTER,
     );
   }
-
-
 }

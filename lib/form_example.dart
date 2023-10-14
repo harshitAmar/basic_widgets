@@ -1,5 +1,6 @@
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 
 class MyForm extends StatefulWidget {
   const MyForm({super.key});
@@ -10,11 +11,21 @@ class MyForm extends StatefulWidget {
 
 class MyFormState extends State<MyForm> {
   final GlobalKey<FormState> _formKey = GlobalKey<FormState>();
-  String _name = '';
+  final String _name = '';
   String _email = '';
   String _password = '';
   String? _selectedGender;
   bool _subscribeToNewsletter = false;
+  TextEditingController nameController = TextEditingController();
+
+  @override
+  void initState() {
+    nameController.addListener(() {
+      print(nameController.text);
+      print(_password);
+    });
+    super.initState();
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -29,6 +40,8 @@ class MyFormState extends State<MyForm> {
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.stretch,
             children: [
+              Text("Name: ${nameController.text}"),
+              Text("Email: $_email"),
               TextFormField(
                 decoration: const InputDecoration(labelText: 'Name'),
                 validator: (value) {
@@ -37,15 +50,28 @@ class MyFormState extends State<MyForm> {
                   }
                   return null;
                 },
-                onSaved: (value) {
-                  if (value != null) {
-                    _name = value;
-                  }
-                },
+                controller: nameController,
               ),
               TextFormField(
-                decoration: const InputDecoration(labelText: 'Email'),
-                keyboardType: TextInputType.emailAddress,
+                decoration: const InputDecoration(
+                  counter: Text("data"),
+                  hintText: "Enter your email",
+                  suffix: Text("data"),
+                  helperText: "This is helper text",
+                  errorText: "This is error text",
+                  helperStyle: TextStyle(),
+
+                  labelStyle: TextStyle(),
+                  // suffixIcon: Text("icons"),
+                  // prefix: Text("prefix"),
+                  // prefixIcon: Text("icon"),
+                  border: InputBorder.none,
+                ),
+                keyboardType: TextInputType.phone,
+                inputFormatters: [
+                  FilteringTextInputFormatter.digitsOnly,
+                ],
+                maxLength: 10,
                 validator: (value) {
                   if (value != null) {
                     if (value.isEmpty) {
@@ -57,6 +83,7 @@ class MyFormState extends State<MyForm> {
                 onSaved: (value) {
                   if (value != null) {
                     _email = value;
+                    setState(() {});
                   }
                 },
               ),
